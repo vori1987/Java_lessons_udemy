@@ -18,20 +18,17 @@ public class ExceptionHandingMain {
                 int denominator = scanner.nextInt();
                 System.out.println(divide(numerator, denominator));
                 continueLoop = false;
-            } catch (ArithmeticException e) {
+            } catch (ArithmeticException | InputMismatchException e) {
                 System.out.println("Exception : " + e);
                 scanner.nextLine();
-                System.out.println("Only non - zero parameters allowed");
-            } catch (InputMismatchException e) {
-                System.out.println("Exception : " + e);
-                scanner.nextLine();
-                System.out.println("Only integer values allowed");
+                System.out.println("Only integer non-zero parameters allowed");
             }
-        }while (continueLoop);
+            System.out.println("Try catch block finished");
+        } while (continueLoop);
 
     }
 
-    private static int divide(int numerator, int denominator) {
+    private static int divide(int numerator, int denominator) throws ArithmeticException, NullPointerException {
         return numerator / denominator;
 
     }
