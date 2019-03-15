@@ -5,7 +5,7 @@ public class InvalidInputParamException extends RuntimeException{
     public InvalidInputParamException() {
     }
 
-    private InvalidInputParamException(String message) {
+    public InvalidInputParamException(String message) {
         super(message);
     }
 
