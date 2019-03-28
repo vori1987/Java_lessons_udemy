@@ -1,4 +1,4 @@
-package com.javalesson.arrays;
+package com.javalesson.collections.arrays;
 
 import java.security.SecureRandom;
 

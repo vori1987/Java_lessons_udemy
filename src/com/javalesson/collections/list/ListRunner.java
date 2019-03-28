@@ -1,4 +1,4 @@
-package com.javalesson.list;
+package com.javalesson.collections.list;
 
 import java.util.Scanner;
 

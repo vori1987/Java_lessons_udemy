@@ -1,6 +1,8 @@
-package com.javalesson.list;
+package com.javalesson.collections.list;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class ToDoList {
 
