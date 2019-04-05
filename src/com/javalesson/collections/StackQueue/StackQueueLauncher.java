@@ -3,9 +3,7 @@ package com.javalesson.collections.StackQueue;
 import com.javalesson.collections.collectionsClass.Card;
 import com.javalesson.collections.collectionsClass.CardComparator;
 
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class StackQueueLauncher {
     public static void main(String[] args) {
@@ -17,13 +15,22 @@ public class StackQueueLauncher {
                 cardDeck.offer(new Card(suit, face));
             }
         }
-        for (int i = 0; i < 10; i++) {
-            System.out.println(cardDeck.poll());
+
+        Deque<Card> cards = new ArrayDeque<>();
+        for(int i = 0; i < 10; i++){
+            cards.offerLast(cardDeck.poll());
         }
-        System.out.println("Deck Size is " + cardDeck.size());
-        System.out.println(cardDeck.peek());
-        cardDeck.clear();
-        System.out.println("Deck Size is " + cardDeck.size());
+        for (int i = 0; i < 10; i++){
+            System.out.println(cards.pollLast());
+        }
+
+//        for (int i = 0; i < 10; i++) {
+//            System.out.println(cardDeck.poll());
+//        }
+//        System.out.println("Deck Size is " + cardDeck.size());
+//        System.out.println(cardDeck.peek());
+//        cardDeck.clear();
+//        System.out.println("Deck Size is " + cardDeck.size());
     }
 
     private static void passengerProcessing() {
