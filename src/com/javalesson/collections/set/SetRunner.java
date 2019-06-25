@@ -2,13 +2,14 @@ package com.javalesson.collections.set;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class SetRunner {
     public static void main(String[] args) {
         Set<Car> sixCars = new HashSet<>();
         sixCars.add(new Car("VW", "Golf", 45));
         sixCars.add(new Car("Audi", "A3", 60));
-        sixCars.add(new Car("VW", "Polo", 25));
+        sixCars.add(new Car("VW", "Polo", 35));
         sixCars.add(new Car("BMW", "Z4", 120));
         sixCars.add(new Car("BMW", "440i", 200));
 
@@ -20,8 +21,10 @@ public class SetRunner {
         europaCars.add(new Car("VW", "Golf", 45));
         europaCars.add(new Car("VW", "Polo", 35));
 
-        Set<Car> uniqueCars = new HashSet<>(sixCars);
+        Set<Car> uniqueCars = new TreeSet<>(sixCars);
         uniqueCars.addAll(europaCars);
+        ((TreeSet<Car>) uniqueCars).subSet(new Car("Toyota", "Auris", 40), true, new Car("Audi", "A3", 60), true);
+
         print(uniqueCars);
 
 
