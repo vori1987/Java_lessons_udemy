@@ -3,7 +3,9 @@ package com.javalesson.javaio;
 import com.javalesson.collections.map.treemap.AverageStudentGrade;
 import com.javalesson.collections.map.treemap.SubjectGrade;
 import com.javalesson.collections.map.treemap.TreeMapRunner;
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 
+import javax.xml.xpath.XPath;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +23,16 @@ public class IOMain {
         Writer writer = new Writer();
         writer.writeFile(grades, FILE_NAME);
        // reader.readFile(FILE_NAME);
-        //    writer.writeWithFormatter();
-        processGrades(grades, writer, BINARY_FILE);
-        outputObjects(reader,BINARY_FILE);
-    }
+//           writer.writeWithFormatter();
+//        processGrades(grades, writer, BINARY_FILE);
+//        outputObjects(reader,BINARY_FILE);
 
+        FileUtils utils = new FileUtils();
+        utils.printIOFileDetails("./");
+
+
+
+    }
     private static void processGrades(SortedMap<AverageStudentGrade, Set<SubjectGrade>> grades, Writer writer, String fileName) {
         List<Student> students = new ArrayList<>();
         for (AverageStudentGrade gradeKey : grades.keySet()) {
