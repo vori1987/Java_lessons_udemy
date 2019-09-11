@@ -1,14 +1,13 @@
 package com.javalesson.javaio;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Path;
+import java.nio.file.*;
 
 public class FileUtils {
 
 
-    public  void printIOFileDetails(String path) throws IOException{
+    public void printIOFileDetails(String path) throws IOException {
         File file = new File(path);
 
         //get path details
@@ -20,10 +19,10 @@ public class FileUtils {
         System.out.println("Is absolute path " + file.isAbsolute());
         System.out.println("Current directory is: " + System.getProperty("user.dir"));
 
-        if (file.isDirectory()){
+        if (file.isDirectory()) {
             System.out.println("It is a directory. Printing content: ");
             String[] list = file.list();
-            if (list != null){
+            if (list != null) {
                 for (String el : list)
                     System.out.println(el);
             }
@@ -42,5 +41,45 @@ public class FileUtils {
             Path filePath = file.toPath();
 
         }
+    }
+
+    public void printNioFileDetails(String fileName) throws IOException {
+
+        Path path = Paths.get(fileName);
+        Path path1 = FileSystems.getDefault().getPath(fileName);
+        Path path2 = Paths.get(System.getProperty("user.dir"), fileName);
+        Path path3 = Paths.get("../../");
+        Path absolutePath = path.toAbsolutePath();
+
+        System.out.println("File name " + path.getFileName());
+        System.out.println("Root dir " + absolutePath.getRoot());
+        System.out.println("Absolute path " + absolutePath);
+        System.out.println("Parent dir " + absolutePath.getParent());
+        System.out.println("Name count " + absolutePath.getNameCount());
+        System.out.println("Sub-path " + absolutePath.subpath(0, 3));
+
+
+        System.out.println("Real path " + path3.toRealPath());
+
+        Files.exists(path);
+        System.out.println("File exist " + Files.exists(path));
+        System.out.println("File does not exist " + Files.notExists(path));
+        System.out.println("Is readable " + Files.isReadable(path));
+        System.out.println("Is writable " + Files.isWritable(path));
+        System.out.println("Is executable " + Files.isExecutable(path));
+
+        System.out.println("Is the same file " + Files.isSameFile(path, path1));
+
+        Path parentPath = absolutePath.getParent();
+        Path filePath = parentPath.resolve("files");
+        if (Files.notExists(filePath)){
+            Files.createDirectories(filePath);
+        }
+        Files.move(absolutePath, filePath.resolve(path), StandardCopyOption.REPLACE_EXISTING);
+        Files.delete(filePath.resolve(path));
+        Files.delete(filePath);
+
+
+
     }
 }

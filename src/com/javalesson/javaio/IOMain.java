@@ -28,7 +28,8 @@ public class IOMain {
 //        outputObjects(reader,BINARY_FILE);
 
         FileUtils utils = new FileUtils();
-        utils.printIOFileDetails("./");
+ //       utils.printNioFileDetails("./");
+        utils.printNioFileDetails(FILE_NAME);
 
 
 
