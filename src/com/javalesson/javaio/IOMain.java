@@ -34,8 +34,8 @@ public class IOMain {
 //        reader.readFileInFull(FILE_NAME);
 //        reader.nioReadFileWithBuffer(FILE_NAME);
 //        writer.nioWriteWithBuffer(BUFFERED_FILE);
-        reader.nioReadWithStream(FILE_NAME);
-        writer.nioWriteWithStream(BUFFERED_FILE);
+//        reader.nioReadWithStream(FILE_NAME);
+//        writer.nioWriteWithStream(BUFFERED_FILE);
     }
 
     private static void processGrades(SortedMap<AverageStudentGrade, Set<SubjectGrade>> grades, Writer writer, String fileName) {

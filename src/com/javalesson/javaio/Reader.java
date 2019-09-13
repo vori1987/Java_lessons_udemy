@@ -69,9 +69,11 @@ public class Reader {
             while ((s = reader.readLine()) != null) {
                 System.out.println(s);
             }
-
-
         }
+    }
+
+    public void nioReadWithChannel (String fileName){
+
     }
 
 }
