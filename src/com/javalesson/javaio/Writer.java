@@ -4,6 +4,8 @@ import com.javalesson.collections.map.treemap.AverageStudentGrade;
 import com.javalesson.collections.map.treemap.SubjectGrade;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -76,5 +78,19 @@ public class Writer {
             stream.write(bytes, 0, bytes.length);
 
         }
+    }
+
+    public void nioWriteWithChannel(String fileName) throws IOException {
+        String str = "You can also create a new file by using the newOutputStream methods," +
+                " as described in Creating and Writing a File using Stream I/O. " +
+                "If you open a new output and close it immediately, an empty file is created. ";
+        RandomAccessFile file = new RandomAccessFile(fileName, "rw");
+        FileChannel channel = file.getChannel();
+        byte[] bytes = str.getBytes();
+        ByteBuffer buffer = ByteBuffer.wrap(bytes);
+        channel.write(buffer);
+        channel.close();
+        
+
     }
 }
