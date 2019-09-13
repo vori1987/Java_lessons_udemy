@@ -1,6 +1,8 @@
 package com.javalesson.javaio;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -63,7 +65,7 @@ public class Reader {
 
     public void nioReadWithStream(String fileName) throws IOException {
         Path path = Paths.get(fileName);
-        try(InputStream in = Files.newInputStream(path)) {
+        try (InputStream in = Files.newInputStream(path)) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String s;
             while ((s = reader.readLine()) != null) {
@@ -72,8 +74,20 @@ public class Reader {
         }
     }
 
-    public void nioReadWithChannel (String fileName){
+    public void nioReadWithChannel(String fileName) throws IOException {
+        RandomAccessFile file = new RandomAccessFile(fileName, "rw");
+        FileChannel channel = file.getChannel();
 
+
+        ByteBuffer buffer = ByteBuffer.allocate(100);
+        int bytesNumber = channel.read(buffer);
+        while (bytesNumber > 0) {
+            buffer.flip();
+            while (buffer.hasRemaining()) {
+                System.out.print((char) buffer.get());
+            }
+            buffer.clear();
+            bytesNumber = channel.read(buffer);
+        }
     }
-
 }
