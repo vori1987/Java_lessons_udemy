@@ -13,8 +13,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 
-import static java.nio.file.StandardOpenOption.APPEND;
-import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.channels.FileChannel.open;
+import static java.nio.file.StandardOpenOption.*;
 
 public class Writer {
 
@@ -90,7 +90,31 @@ public class Writer {
         ByteBuffer buffer = ByteBuffer.wrap(bytes);
         channel.write(buffer);
         channel.close();
-        
+    }
 
+    public void writeWithRandomAccess(String fileName) throws IOException {
+        ByteBuffer mark = ByteBuffer.wrap(" MARKED AREA ".getBytes());
+        ByteBuffer buffer = ByteBuffer.allocate(10);
+
+        Path path = Paths.get(fileName);
+        try (FileChannel openedFile = FileChannel.open(path, READ, WRITE)) {
+            int numBytes = 0;
+            while (buffer.hasRemaining() && numBytes != -1) {
+                numBytes = openedFile.read(buffer);
+            }
+
+            openedFile.position(0);
+            openedFile.write(mark);
+            long size = openedFile.size();
+            openedFile.position(size/2);
+            mark.rewind();
+            openedFile.write(mark);
+            openedFile.position(size - 1);
+            mark.rewind();
+            openedFile.write(mark);
+            buffer.rewind();
+            openedFile.write(buffer);
+
+        }
     }
 }

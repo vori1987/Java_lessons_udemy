@@ -57,8 +57,6 @@ public class FileUtils {
         System.out.println("Parent dir " + absolutePath.getParent());
         System.out.println("Name count " + absolutePath.getNameCount());
         System.out.println("Sub-path " + absolutePath.subpath(0, 3));
-
-
         System.out.println("Real path " + path3.toRealPath());
 
         Files.exists(path);
@@ -72,14 +70,42 @@ public class FileUtils {
 
         Path parentPath = absolutePath.getParent();
         Path filePath = parentPath.resolve("files");
-        if (Files.notExists(filePath)){
+        if (Files.notExists(filePath)) {
             Files.createDirectories(filePath);
         }
         Files.move(absolutePath, filePath.resolve(path), StandardCopyOption.REPLACE_EXISTING);
         Files.delete(filePath.resolve(path));
         Files.delete(filePath);
 
+    }
+
+    public void processDir() throws IOException {
+        Path dir = Paths.get("temp");
+        if (Files.notExists(dir)) {
+            Files.createDirectory(dir);
+        }
+
+        Files.createDirectories(Paths.get("temp/a/b/c"));
+
+        Files.createTempDirectory(dir, "tmp");
+
+        Iterable<Path> rootDirectories = FileSystems.getDefault().getRootDirectories();
+        for (Path rootDir : rootDirectories) {
+            System.out.println(rootDir);
+        }
+        DirectoryStream.Filter<Path> filter = new DirectoryStream.Filter<Path>() {
+            @Override
+            public boolean accept(Path entry) throws IOException {
+                return Files.isDirectory(entry);
+            }
+        };
+        try (DirectoryStream<Path> paths = Files.newDirectoryStream(dir, filter)) {
+            for (Path p : paths) {
+                System.out.println(p);
+            }
+        }
 
 
     }
+
 }
