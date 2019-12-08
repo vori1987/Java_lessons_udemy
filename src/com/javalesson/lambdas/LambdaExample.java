@@ -40,17 +40,21 @@ public class LambdaExample {
         String s = "Hello ";
         Double d = 0.123;
 
-        TransformUtils<Double> doubleUtils = new TransformUtils<>();
-        System.out.println(doubleUtils.transform(d, Math::sin));
+//        TransformUtils<Double> doubleUtils = new TransformUtils<>();
+//        System.out.println(doubleUtils.transform(d, Math::sin));
+//
+//        TransformUtils<String> stringUtils = new TransformUtils<>();
+//        System.out.println(stringUtils.transform(s, TransformUtils::exclaim));
+//
+//        String suffix = "Vova";
+//        System.out.println(stringUtils.transform(suffix, s::concat));
+//
+//        System.out.println(stringUtils.transform(s, String::toUpperCase));
+//        System.out.println(stringUtils.transform(s, String::new));
 
-        TransformUtils<String> stringUtils = new TransformUtils<>();
-        System.out.println(stringUtils.transform(s, TransformUtils::exclaim));
-
-        String suffix = "Vova";
-        System.out.println(stringUtils.transform(suffix, s::concat));
-
-        System.out.println(stringUtils.transform(s, String::toUpperCase));
-        System.out.println(stringUtils.transform(s, String::new));
+        LambdaScopeTest scope = new LambdaScopeTest();
+        LambdaScopeTest.LambdaScopeInner inner = scope.new LambdaScopeInner();
+        inner.testScope(9999.000);
 
 
     }
